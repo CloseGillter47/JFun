@@ -15,11 +15,7 @@ export class Logger {
     constructor() {
         let _config = <log4js.Configuration>{};
         Object.assign(_config, config);
-        log4js.configure(_config);
         this.init(_config);
-
-        this.errorLogger = log4js.getLogger('errorLogger');
-        this.resLogger = log4js.getLogger('resLogger');
     }
 
     /**
@@ -45,14 +41,20 @@ export class Logger {
 
         this.config = config;
 
+        log4js.configure(config);
+
+        this.errorLogger = log4js.getLogger('errorLogger');
+
+        this.resLogger = log4js.getLogger('resLogger');
+
         if (config['baseLogPath']) {
 
             if (!fs.existsSync(config['baseLogPath'])) { fs.mkdirSync(config['baseLogPath']); }
 
             if (config.appenders) {
 
+                console.dir(config.appenders);
                 for (let i in config.appenders) {
-
                 }
             }
         }

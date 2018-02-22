@@ -32,10 +32,10 @@ export default {
     "appenders": [
         // 错误日志
         {
-            // logger名称
-            "category": "errorLogger",
             // 日志类型          
             "type": "dateFile",
+            // logger名称
+            "category": "errorLogger",
             // 日志输出位置                 
             "filename": errorLogPath,
             // 是否总是有后缀名          
@@ -47,8 +47,8 @@ export default {
         },
         // 响应日志
         {
-            "category": "resLogger",
             "type": "dateFile",
+            "category": "resLogger",
             "filename": responseLogPath,
             "alwaysIncludePattern": true,
             "pattern": "-yyyy-MM-dd-hh.log",

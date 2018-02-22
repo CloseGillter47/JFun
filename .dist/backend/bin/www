@@ -1,0 +1,90 @@
+#!/usr/bin/env node
+
+/**
+ * 依赖模块.
+ */
+
+var server = require('../server');
+var debug = require('debug')('demo:server');
+var http = require('http');
+
+/**
+ * 从运行环境中获取端口.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+
+/**
+ * 创建 HTTP 服务器.
+ */
+var app = server.Server.bootstrap().app;
+
+var httpServer = http.createServer(app.callback());
+
+/**
+ * 监听提供的端口.
+ */
+
+httpServer.listen(port);
+httpServer.on('error', onError);
+httpServer.on('listening', onListening);
+
+/**
+ * 将端口号转换成数字、字符、或boolean.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // 字符
+    return val;
+  }
+
+  if (port >= 0) {
+    // 数字
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * 监听 HTTP 服务器的 "error" 事件.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // 用友好的提示处理某些特定的错误事件
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' 权限不足');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' 已被使用');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * 处理 HTTP 服务器的 "listening" 事件.
+ */
+
+function onListening() {
+  var addr = httpServer.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

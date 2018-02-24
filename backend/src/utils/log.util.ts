@@ -101,7 +101,7 @@ export class Logger {
         let message = new String();
 
         // 开始记录响应日志
-        message += `\n--------------- response log start ---------------\n`;
+        message += `\n --------------- response log start --------------- \n`;
 
         // 记录响应的内容
         message += this.formatRequest(ctx, ms);
@@ -113,7 +113,7 @@ export class Logger {
         message += `\t response body: \n\t${JSON.stringify(ctx.body)}  \n`;
 
         // 结束记录响应日志
-        message += `\n---------------  response log end  ---------------\n`;
+        message += `\n ---------------  response log end  --------------- \n`;
 
         return message.toString();
     }
@@ -123,7 +123,7 @@ export class Logger {
         let message = new String();
 
         // 开始记录错误日志
-        message += `\n===============  error log start   ===============\n`;
+        message += `\n ===============  error log start   =============== \n`;
 
         // 记录响应的内容
         message += this.formatRequest(ctx, ms);
@@ -138,7 +138,7 @@ export class Logger {
         message += `\t err stack:\t\t${err.stack}  \n`;
 
         // 结束记录错误日志
-        message += `\n===============   error log end    ===============\n`;
+        message += `\n ===============   error log end    =============== \n`;
 
         return message.toString();
     }

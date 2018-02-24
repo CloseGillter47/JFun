@@ -2,6 +2,8 @@ import { Context, Middleware } from "koa";
 import * as Router from "koa-router";
 import { BaseRoute } from "./route";
 
+// import { MSql as mysql } from "../mysql"
+
 export class IndexRoute extends BaseRoute {
 
     public static create() {

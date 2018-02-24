@@ -11,6 +11,8 @@ import * as path from "path";
 
 import { Logger } from "./utils/log.util";
 
+import { MSql as mysql } from "./mysql"
+
 import { IndexRoute } from "./routes/index";
 import { UserRoute } from "./routes/users";
 
@@ -51,7 +53,7 @@ export class Server {
         });
     }
 
-    public config() {
+    public async config() {
 
         this.app.use(bodyparser({
             enableTypes: ['json', 'form', 'text']
@@ -90,6 +92,18 @@ export class Server {
                 log.error(ctx, error, ms);
             }
         });
+
+        try {
+
+            let res = await mysql.query('SELECT 1 + 1 AS solution');
+
+            console.log(res);
+
+        } catch (error) {
+
+            console.log(error);
+        }
+
     }
 
     public routes() {
